@@ -1,4 +1,5 @@
 import BackgroundCanvas from "./components/BackgroundCanvas";
+import RainCanvas from "./components/RainCanvas";
 
 
 
@@ -6,6 +7,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col  text-gray-900 font-sans">
         <BackgroundCanvas />
+        <RainCanvas />
       <header className="bg-white shadow">
         <div className="max-w-4xl mx-auto py-6 px-4 flex flex-col sm:flex-row items-center justify-between">
           <h1 className="text-3xl font-bold tracking-tight">Sven Lueck</h1>

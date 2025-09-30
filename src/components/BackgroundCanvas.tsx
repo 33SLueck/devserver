@@ -5,8 +5,7 @@ const BackgroundCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const particlesRef = useRef<Particle[]>([]);
-  // Emitter animation state
-  const tRef = useRef(0); // progress along the curve (0..1)
+  const tRef = useRef(0); 
   const emitterActiveRef = useRef(true);
 
   useEffect(() => {
@@ -14,7 +13,7 @@ const BackgroundCanvas = () => {
     const container = containerRef.current;
     if (!canvas || !container) return;
 
-    // Set up canvas size
+   
     const resizeCanvas = () => {
       canvas.width = container.clientWidth;
       canvas.height = container.clientHeight;
@@ -23,7 +22,7 @@ const BackgroundCanvas = () => {
     observer.observe(container);
     resizeCanvas();
 
-    // Curve points
+  
     const getCurvePoints = () => {
       const w = canvas.width;
       const h = canvas.height;
@@ -34,7 +33,7 @@ const BackgroundCanvas = () => {
       };
     };
 
-    // Quadratic Bezier interpolation
+
     const getEmitterPos = (t: number) => {
       const { start, control, end } = getCurvePoints();
       const x = (1 - t) * (1 - t) * start.x + 2 * (1 - t) * t * control.x + t * t * end.x;
@@ -50,19 +49,19 @@ const BackgroundCanvas = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       hue++;
 
-      // Move emitter along curve
+   
       if (emitterActiveRef.current && tRef.current <= 1) {
         const { x, y } = getEmitterPos(tRef.current);
-        // Draw emitter (optional)
+     
         ctx.beginPath();
         ctx.arc(x, y, 6, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(37, 99, 235, 0.25)'; // transparent blue
+        ctx.fillStyle = 'rgba(37, 99, 235, 0.25)'; 
         ctx.fill();
-        // Emit particles
+      
         for (let i = 0; i < 2; i++) {
           particlesRef.current.push(new Particle(x, y));
         }
-        tRef.current += 0.003; // slower speed
+        tRef.current += 0.005; 
       } else {
         emitterActiveRef.current = false;
       }
